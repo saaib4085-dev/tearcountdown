@@ -30,6 +30,10 @@
  */
 
 @theme inline {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", "DM Sans", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -74,25 +78,25 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --background: oklch(0.962 0.008 82);
+  --foreground: oklch(0.195 0.015 65);
+  --card: oklch(0.992 0.004 82);
+  --card-foreground: oklch(0.195 0.015 65);
+  --popover: oklch(0.995 0.003 82);
+  --popover-foreground: oklch(0.195 0.015 65);
+  --primary: oklch(0.545 0.195 28);
+  --primary-foreground: oklch(0.985 0.005 82);
+  --secondary: oklch(0.925 0.012 80);
+  --secondary-foreground: oklch(0.24 0.016 65);
+  --muted: oklch(0.935 0.01 80);
+  --muted-foreground: oklch(0.49 0.016 70);
+  --accent: oklch(0.915 0.018 76);
+  --accent-foreground: oklch(0.21 0.016 65);
+  --destructive: oklch(0.577 0.22 25);
+  --destructive-foreground: oklch(0.985 0.005 82);
+  --border: oklch(0.865 0.014 78);
+  --input: oklch(0.88 0.012 78);
+  --ring: oklch(0.545 0.195 28);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -152,5 +156,104 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
   }
+}
+
+@keyframes tear-down {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  22% {
+    transform: translate3d(4px, 24px, 0) rotate(-3deg) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(38px, 460px, 0) rotate(16deg) scale(0.92);
+    opacity: 0;
+  }
+}
+
+@keyframes tear-up {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(-4px, -28px, 0) rotate(3deg) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-32px, -420px, 0) rotate(-14deg) scale(0.92);
+    opacity: 0;
+  }
+}
+
+@keyframes tear-left {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-420px, 90px, 0) rotate(-22deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes tear-right {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(420px, 90px, 0) rotate(22deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes tear-peel {
+  0% {
+    transform: perspective(900px) rotateX(0deg) rotateZ(0deg) translate3d(0, 0, 0);
+    transform-origin: top left;
+    opacity: 1;
+  }
+  35% {
+    transform: perspective(900px) rotateX(24deg) rotateZ(-8deg) translate3d(12px, 48px, 0);
+    transform-origin: top left;
+    opacity: 0.98;
+  }
+  100% {
+    transform: perspective(900px) rotateX(55deg) rotateZ(-28deg) translate3d(90px, 430px, 0);
+    transform-origin: top left;
+    opacity: 0;
+  }
+}
+
+.animate-tear-down {
+  animation-name: tear-down;
+  animation-timing-function: cubic-bezier(0.32, 0.04, 0.58, 1);
+  animation-fill-mode: forwards;
+}
+.animate-tear-up {
+  animation-name: tear-up;
+  animation-timing-function: cubic-bezier(0.32, 0.04, 0.58, 1);
+  animation-fill-mode: forwards;
+}
+.animate-tear-left {
+  animation-name: tear-left;
+  animation-timing-function: cubic-bezier(0.32, 0.04, 0.58, 1);
+  animation-fill-mode: forwards;
+}
+.animate-tear-right {
+  animation-name: tear-right;
+  animation-timing-function: cubic-bezier(0.32, 0.04, 0.58, 1);
+  animation-fill-mode: forwards;
+}
+.animate-tear-peel {
+  animation-name: tear-peel;
+  animation-timing-function: cubic-bezier(0.28, 0.08, 0.45, 1);
+  animation-fill-mode: forwards;
 }

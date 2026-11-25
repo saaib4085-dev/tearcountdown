@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -81,16 +82,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "SlipDay — Digital Tear-Off Countdown Calendar" },
+      {
+        name: "description",
+        content:
+          "Mobile-first digital tear-off countdown calendar with live style studio, multi-event rules, and home-screen widget previews.",
+      },
+      { name: "author", content: "SlipDay" },
+      { property: "og:title", content: "SlipDay — Digital Tear-Off Countdown Calendar" },
+      {
+        property: "og:description",
+        content:
+          "Mobile-first digital tear-off countdown calendar with live style studio, multi-event rules, and home-screen widget previews.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -125,6 +146,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );
 }
